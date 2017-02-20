@@ -6,18 +6,15 @@ const User = require('../models/user.js');
 
 const users = [
   {
-    name: 'Tuno',
-    email: 'Tuno@Tuno.com',
+    username: 'Tuno@Tuno.com',
     password: 'TunoPassword',
   },
   {
-    name: 'Carlos',
-    email: 'carlos@carlos.com',
+    username: 'carlos@carlos.com',
     password: 'carlosPassword',
   },
   {
-    name: 'juan',
-    email: 'juan@juan.com',
+    username: 'juan@juan.com',
     password: 'juanPassword',
   },
 ];
@@ -25,7 +22,7 @@ const users = [
 User.create(users, (err, docs) => {
   if (err) { throw err; }
   docs.forEach( (user) => {
-    console.log(user.name);
+    console.log(user.username);
   });
   mongoose.connection.close();
 });
