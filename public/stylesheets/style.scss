@@ -1,0 +1,51 @@
+$brand-color: #3B2642;
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+h1.logo-font {
+  font-family: SignPainter-HouseScriptSemibold, sans-serif;
+  font-size: 48px;
+  color: #FFFFFF;
+}
+
+.navbar-fixed-top{
+  background: $brand-color;
+  border: 1px solid #979797;
+  box-shadow: 0 7px 10px 1px rgba(0,0,0,0.50);
+  border: none;
+}
+
+.clear-header{
+  height: 80px
+}
+
+.landing-background{
+  background-image: url('../images/landing1.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.signup{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
