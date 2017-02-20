@@ -7,11 +7,28 @@
     <script src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
   </head>
   <body>
-    <div class="header navbar-default navbar-fixed-top">
+    <nav class="navbar-header header navbar-fixed-top">
       <div class="container-fluid">
-        <h1 class="logo-font">Journapic</h1>
+        <div class="col">
+          <h1 class="logo-font">Journapic</h1>
+          <ul class="navbar-nav navbar-right nav">
+            <%if (typeof(req.user) === "undefined") {%>
+            <li><a href="/auth/login">Login</a></li>
+            <%}%>
+            <%if (typeof(req.user) === "undefined") {%>
+            <li><a href="/auth/signup">Signup</a></li>
+            <%}%>
+            <%if (typeof(req.user) !== "undefined") {%>
+            <li>
+              <form action="/auth/logout" method="POST">
+                <button class="btn btn-link btn-logout" type="submit">Logout</button>
+              </form>
+            </li>
+            <%}%>
+          </ul>
+        </div>
       </div>
-    </div>
+    </nav>
     <div class="clear-header"></div>
     <div class="main-container container-fluid">
       <%- body -%>

@@ -6,15 +6,18 @@ const User = require('../models/user.js');
 
 const users = [
   {
-    username: 'Tuno@Tuno.com',
+    username: 'Saturnini',
+    email: 'Tuno@Tuno.com',
     password: 'TunoPassword',
   },
   {
-    username: 'carlos@carlos.com',
+    username: 'Carlini',
+    email: 'carlos@carlos.com',
     password: 'carlosPassword',
   },
   {
-    username: 'juan@juan.com',
+    username: 'juanini',
+    email: 'juan@juan.com',
     password: 'juanPassword',
   },
 ];
