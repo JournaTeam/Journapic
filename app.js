@@ -1,26 +1,15 @@
 /*jshint esversion:6*/
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-
-const index = require('./routes/index');
-const authController = require('./routes/authController');
-
-const mongoose = require('mongoose');
-const expressLayouts = require('express-ejs-layouts');
+const express          = require('express');
+const path             = require('path');
+const favicon          = require('serve-favicon');
+const logger           = require('morgan');
+const cookieParser     = require('cookie-parser');
+const bodyParser       = require('body-parser');
+const mongoose         = require('mongoose');
+const expressLayouts   = require('express-ejs-layouts');
 
 //Connect to db
 mongoose.connect('mongodb://localhost:27017/journapic');
-
-//Passport
-const session = require("express-session");
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-
 
 const app = express();
 
@@ -39,19 +28,6 @@ app.use(cookieParser());
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components/')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
-  secret: "passport-local-strategy",
-  resave: true,
-  saveUninitialized: true
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use('/', index);
-app.use('/auth', authController);
-
-
 // Check if logged in
 app.use( (req, res, next) => {
   if (typeof(req.user) !== "undefined"){
@@ -61,6 +37,9 @@ app.use( (req, res, next) => {
   }
   next();
 });
+
+const index            = require('./routes/index');
+app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -80,5 +59,31 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
 module.exports = app;
+
+
+
+
+
+
+
+// //Passport
+// const session = require("express-session");
+// const bcrypt = require("bcrypt");
+// const passport = require("passport");
+// const LocalStrategy = require("passport-local").Strategy;
+//
+// const authController   = require('./routes/authController');
+//
+// app.use(session({
+//   secret: "passport-local-strategy",
+//   resave: true,
+//   saveUninitialized: true
+// }));
+//
+// app.use(passport.initialize());
+// app.use(passport.session());
+//
+// app.use('/auth', authController);
+//
+//
