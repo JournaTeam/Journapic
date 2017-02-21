@@ -129,6 +129,9 @@ app.use( (req, res, next) => {
 const authRoutes      = require('./routes/authentication.js');
 app.use('/', authRoutes);
 
+const entryRoutes      = require('./routes/entry.js');
+app.use('/entry', entryRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -145,7 +148,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {req});
 });
 
 module.exports = app;

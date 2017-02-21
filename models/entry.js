@@ -7,7 +7,8 @@ const entrySchema = new Schema({
     published : Boolean,
     picture : String,
     comment : String,
-    location : String
+    location : String,
+    achieved : Boolean
   },{
     timestamps: {
       createdAt: "created_at",
