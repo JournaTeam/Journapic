@@ -4,7 +4,11 @@ const passport     = require('passport');
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 
 router.get('/', function(req, res, next) {
-  res.render('index', {req});
+  if(req.user){
+    res.render('index', {req});
+  }else{
+    res.render('landing', {req});
+  }
 });
 
 router.get('/signup', ensureLoggedOut(), (req, res) => {
