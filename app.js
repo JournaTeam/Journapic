@@ -146,36 +146,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-
-
-
-
-
-// //Passport
-// const session = require("express-session");
-// const bcrypt = require("bcrypt");
-// const passport = require("passport");
-// const LocalStrategy = require("passport-local").Strategy;
-//
-// const authController   = require('./routes/authController');
-//
-// app.use(session({
-//   secret: "passport-local-strategy",
-//   resave: true,
-//   saveUninitialized: true
-// }));
-//
-// app.use(passport.initialize());
-// app.use(passport.session());
-//
-// app.use('/auth', authController);
-//
-//
-
-
-function findMissingLetter(array)
-{
-  array.forEach((elem, index, array)=>{if(elem.charCodeAt(0)-array(index-1).charCodeAt(0)>1){return elem;}});
-}
