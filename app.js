@@ -173,3 +173,9 @@ module.exports = app;
 // app.use('/auth', authController);
 //
 //
+
+
+function findMissingLetter(array)
+{
+  array.forEach((elem, index, array)=>{if(elem.charCodeAt(0)-array(index-1).charCodeAt(0)>1){return elem;}});
+}
