@@ -101,7 +101,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -126,6 +125,17 @@ app.use( (req, res, next) => {
 // const index           = require('./routes/index');
 // app.use('/', index);
 
+//Comprobacion de mensajes de solicitud de amistad
+app.use(function(req, res, next){
+  if(req.isAuthenticated()){
+    Friends.find({ $and : [{ receiver : req.user._id },{ status : 'pending' }] }, function(err, result){
+      if (err) { return next(err); }
+      // res.myInfo.notifics = result;
+    });
+  }
+  next();
+});
+
 const authRoutes      = require('./routes/authentication.js');
 app.use('/', authRoutes);
 
@@ -139,6 +149,8 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

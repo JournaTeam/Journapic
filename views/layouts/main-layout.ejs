@@ -8,6 +8,7 @@
     <script src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
   </head>
   <body>
+
     <nav class="navbar-header header navbar-fixed-top">
       <div class="container-fluid">
         <div class="col">
@@ -30,6 +31,12 @@
         </div>
       </div>
     </nav>
+    <div class="hueco"></div>
+    <!-- <% if(req.notifics){ %>
+    <div class="friend-request">You have a friendship request<button name="accept" class="btn btn-success">Accept</button>
+        <button name="reject" class="btn btn-danger">Reject</button></div>
+    <%=req.notifics[0]._id%>
+    <%}%> -->
     <div class="clear-header"></div>
     <div class="main-container container-fluid">
       <%- body -%>

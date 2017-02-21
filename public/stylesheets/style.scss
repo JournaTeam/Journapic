@@ -1,5 +1,7 @@
 $brand-color: #3B2642;
-$color-white: #FFFFFF;;
+$color-white: #FFFFFF;
+$green-notification: #dff0d8;
+$dark-green: #468847;
 
 body {
   padding: 50px;
@@ -59,4 +61,20 @@ h1.logo-font {
 
 .nav > li > a {
   color: $color-white;
+}
+
+.friend-request{
+  float: right;
+  clear: both;
+  background-color: $green-notification;
+  height: 50px;
+  width: 400px;
+  border: 1px solid $dark-green;
+  border-radius: 5px;
+  padding: 7px;
+  text-align: center;
+}
+
+.hueco{
+  height: 50px;
 }

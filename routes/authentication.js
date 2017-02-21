@@ -3,6 +3,7 @@ const router       = express.Router();
 const passport     = require('passport');
 const User         = require('../models/user');
 const Entry        = require('../models/entry');
+const Friends      = require('../models/friends');
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 
 function ensureAuthenticator(req, res, next){
@@ -14,6 +15,7 @@ function ensureAuthenticator(req, res, next){
 }
 
 router.get('/', ensureAuthenticator, function(req, res, next) {
+    // console.log(req.myInfo);
     res.render('index', {req});
 });
 
@@ -40,12 +42,36 @@ router.post('/logout', ensureLoggedIn('/login'), (req, res) => {
     res.redirect('/');
 });
 
+router.post('/', ensureLoggedIn('/login'), (req, res) => {
+  const friendUserName = req.body.username;
+  User.findOne({ username : friendUserName }, function (err, result){
+    if (err) { res.redirect('/add'); }    //Darle una vuelta
+    const newFriendship = new Friends({
+      requester : req.user._id,
+      receiver : result._id,
+      status : 'pending'
+    });
+    newFriendship.save( (err) => {
+      if (err) {
+        res.render('/add', {req});
+      } else {
+        console.log("nueva amistad guardada correctamente");
+        res.redirect('/');
+      }
+    });
+  });
+});
+
+router.get('/add', ensureLoggedIn(), function(req, res, next) {
+  res.render('add', {req});
+});
+
 router.get('/:username', ensureLoggedIn(), (req, res) => {
-    var usernameParam = req.params.username;
+    const usernameParam = req.params.username;
     if (usernameParam === req.user.username) {
       User.findOne({ username : usernameParam }, function (err, result){
         if (err) { return next(err); }
-        var id = result._id;
+        const id = result._id;
         Entry.find({ _creator : id }, function(err, arrayOfEntries){
           if (err) { return next(err); }
           res.render('bio', {req, arrayOfEntries, usernameParam});
@@ -55,6 +81,7 @@ router.get('/:username', ensureLoggedIn(), (req, res) => {
       res.redirect('/');
     }
 });
+
 
 
 module.exports = router;
