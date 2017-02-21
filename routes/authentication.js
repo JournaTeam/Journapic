@@ -3,12 +3,16 @@ const router       = express.Router();
 const passport     = require('passport');
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 
-router.get('/', function(req, res, next) {
-  if(req.user){
-    res.render('index', {req});
+function ensureAuthenticator(req, res, next){
+  if(req.isAuthenticated()){
+    next();
   }else{
     res.render('landing', {req});
   }
+}
+
+router.get('/', ensureAuthenticator, function(req, res, next) {
+    res.render('index', {req});
 });
 
 router.get('/signup', ensureLoggedOut(), (req, res) => {
