@@ -23,7 +23,7 @@
             <%if (typeof(req.user) !== "undefined") {%>
             <li>
               <form action="/logout" method="POST">
-                <button class="btn btn-link btn-logout" type="submit">Logout</button>
+                <button class="btn btn-danger logout" type="submit">Logout</button>
               </form>
             </li>
             <%}%>
@@ -32,11 +32,13 @@
       </div>
     </nav>
     <div class="hueco"></div>
-    <!-- <% if(req.notifics){ %>
-    <div class="friend-request">You have a friendship request<button name="accept" class="btn btn-success">Accept</button>
-        <button name="reject" class="btn btn-danger">Reject</button></div>
-    <%=req.notifics[0]._id%>
-    <%}%> -->
+    <% if (notifications){  %>
+      <% notifications.forEach(function(elem){%>
+        <div class="friend-request">You have a friendship request &nbsp;&nbsp;
+          <button name="review" class="btn btn-success">Review</button>
+        </div>
+      <%})%>
+    <%}%>
     <div class="clear-header"></div>
     <div class="main-container container-fluid">
       <%- body -%>

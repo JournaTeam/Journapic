@@ -15,8 +15,9 @@ function ensureAuthenticator(req, res, next){
 }
 
 router.get('/', ensureAuthenticator, function(req, res, next) {
-    // console.log(req.myInfo);
-    res.render('index', {req});
+  console.log("EStamos en authentication y debajo va notifics");
+  console.log(res.locals.notifics);
+    res.render('index', {req, notifications: res.locals.notifics});
 });
 
 router.get('/signup', ensureLoggedOut(), (req, res) => {

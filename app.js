@@ -14,12 +14,11 @@ const bcrypt              = require('bcrypt');
 const User                = require('./models/user');
 const Friends             = require('./models/friends');
 const Entry               = require('./models/entry');
-
-
-
+const authRoutes      = require('./routes/authentication.js');
+const entryRoutes      = require('./routes/entry.js');
+const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 //Connect to db
 mongoose.connect('mongodb://localhost:27017/journapic');
-
 const app = express();
 
 // view engine setup
@@ -120,29 +119,22 @@ app.use( (req, res, next) => {
   next();
 });
 
-
-// Rutas:
-// const index           = require('./routes/index');
-// app.use('/', index);
-
 //Comprobacion de mensajes de solicitud de amistad
-app.use(function(req, res, next){
-  if(req.isAuthenticated()){
-    Friends.find({ $and : [{ receiver : req.user._id },{ status : 'pending' }] }, function(err, result){
+
+app.use("/", function(req, res, next){
+  if (res.locals.userSignedIn){
+    Friends.find({ receiver : req.user._id , status : 'pending' }, function(err, result){
       if (err) { return next(err); }
-      // res.myInfo.notifics = result;
+      console.log("estamos en el fockin middleware");
+      res.locals.notifics = result;
+      console.log(result);
+      next();
     });
-  }
-  next();
+  } else {next();}
 });
 
-const authRoutes      = require('./routes/authentication.js');
 app.use('/', authRoutes);
-
-const entryRoutes      = require('./routes/entry.js');
 app.use('/entry', entryRoutes);
-
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
