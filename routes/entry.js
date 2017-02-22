@@ -8,7 +8,7 @@ const upload       = multer({ dest: './public/uploads/' });
 
 
 router.get('/new', ensureLoggedIn('/'), function(req, res, next) {
-    res.render('./entry/new', {req});
+    res.render('./entry/new', {req, notifications: res.locals.notifics});
 });
 
 router.post('/', [ensureLoggedIn('/login'), upload.single('file')], function(req, res, next) {

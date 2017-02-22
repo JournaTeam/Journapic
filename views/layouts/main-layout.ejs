@@ -32,14 +32,13 @@
       </div>
     </nav>
     <div class="hueco"></div>
-    <% if (notifications){  %>
+    <% if (typeof(notifications)!=='undefined'){  %>
       <% notifications.forEach(function(elem){%>
         <div class="friend-request">You have a friendship request &nbsp;&nbsp;
-          <button name="review" class="btn btn-success">Review</button>
+          <a href="/friends"><button name="review" class="btn btn-success">Review</button></a>
         </div>
       <%})%>
     <%}%>
-    <div class="clear-header"></div>
     <div class="main-container container-fluid">
       <%- body -%>
     </div>

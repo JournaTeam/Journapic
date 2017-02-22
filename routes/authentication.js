@@ -15,8 +15,6 @@ function ensureAuthenticator(req, res, next){
 }
 
 router.get('/', ensureAuthenticator, function(req, res, next) {
-  console.log("EStamos en authentication y debajo va notifics");
-  console.log(res.locals.notifics);
     res.render('index', {req, notifications: res.locals.notifics});
 });
 
@@ -43,29 +41,6 @@ router.post('/logout', ensureLoggedIn('/login'), (req, res) => {
     res.redirect('/');
 });
 
-router.post('/', ensureLoggedIn('/login'), (req, res) => {
-  const friendUserName = req.body.username;
-  User.findOne({ username : friendUserName }, function (err, result){
-    if (err) { res.redirect('/add'); }    //Darle una vuelta
-    const newFriendship = new Friends({
-      requester : req.user._id,
-      receiver : result._id,
-      status : 'pending'
-    });
-    newFriendship.save( (err) => {
-      if (err) {
-        res.render('/add', {req});
-      } else {
-        res.redirect('/');
-      }
-    });
-  });
-});
-
-router.get('/add', ensureLoggedIn(), function(req, res, next) {
-  res.render('add', {req});
-});
-
 router.get('/:username', ensureLoggedIn(), (req, res) => {
     const usernameParam = req.params.username;
     if (usernameParam === req.user.username) {
@@ -74,7 +49,7 @@ router.get('/:username', ensureLoggedIn(), (req, res) => {
         const id = result._id;
         Entry.find({ _creator : id }, function(err, arrayOfEntries){
           if (err) { return next(err); }
-          res.render('bio', {req, arrayOfEntries, usernameParam});
+          res.render('bio', {req, arrayOfEntries, usernameParam, notifications: res.locals.notifics});
         });
       });
     }else{
