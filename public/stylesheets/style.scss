@@ -79,7 +79,7 @@ h1.logo-font {
   clear: both;
   background-color: $green-notification;
   height: 50px;
-  width: 320px;
+  width: 450px;
   border: 1px solid $dark-green;
   border-radius: 5px;
   padding: 7px;
@@ -93,10 +93,4 @@ h1.logo-font {
 .logout{
   margin: 10px 10px 0px 0px;
 
-}
-
-.navbar-inverse .navbar-brand:hover,
-.navbar-inverse .navbar-brand:focus {
-  background-color: black;
-  color: white;
 }

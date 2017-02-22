@@ -123,7 +123,11 @@ app.use( (req, res, next) => {
 //Comprobacion de mensajes de solicitud de amistad
 app.use("/", function(req, res, next){
   if (res.locals.userSignedIn){
-    Friends.find({ receiver : req.user._id , status : 'pending' }, function(err, result){
+    Friends
+    .find({ receiver : req.user._id , status : 'pending' })
+    .populate('requester')
+    .populate('receiver')
+    .exec( function(err, result){
       if (err) { return next(err); }
       res.locals.notifics = result;
       next();

@@ -34,7 +34,7 @@
     <div class="hueco"></div>
     <% if (typeof(notifications)!=='undefined'){  %>
       <% notifications.forEach(function(elem){%>
-        <div class="friend-request">You have a friendship request &nbsp;&nbsp;
+        <div class="friend-request">You have a new friendship request from <%=elem.receiver.username%> &nbsp;&nbsp;
           <a href="/friends"><button name="review" class="btn btn-success">Review</button></a>
         </div>
       <%})%>
