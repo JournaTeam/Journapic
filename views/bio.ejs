@@ -1,0 +1,13 @@
+<div class="landing-background">
+</div>
+Hola <%=req.user.username%>, aqui tienes la bio de <%=usernameParam%>:
+<br>
+<ul>
+  <%arrayOfEntries.forEach(function(elem){%>
+    <br><br>
+    <li>Picture:   <%=elem.picture%></li>
+    <li>Comment:   <%=elem.comment%> </li>
+    <li>Location:   <%=elem.location%> </li>
+    <li>Achieved?   <%=elem.achieved%> </li>
+  <%});%>
+</ul>
