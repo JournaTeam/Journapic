@@ -1,11 +1,12 @@
-<div class="landing-background">
-</div>
+<!-- <div class="landing-background">
+</div> -->
 Hola <%=req.user.username%>, aqui tienes la bio de <%=usernameParam%>:
 <br>
 <ul>
   <%arrayOfEntries.forEach(function(elem){%>
     <br><br>
-    <li>Picture:   <%=elem.picture%></li>
+    <li>Picture:  <br>
+      <img src="<%= elem.picPath %>" alt="<%= elem.picName %>" /></li>
     <li>Comment:   <%=elem.comment%> </li>
     <li>Location:   <%=elem.location%> </li>
     <li>Achieved?   <%=elem.achieved%> </li>

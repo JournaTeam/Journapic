@@ -55,7 +55,6 @@ router.post('/', ensureLoggedIn('/login'), (req, res) => {
       if (err) {
         res.render('/add', {req});
       } else {
-        console.log("nueva amistad guardada correctamente");
         res.redirect('/');
       }
     });

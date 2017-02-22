@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const entrySchema = new Schema({
     _creator : { type: Schema.Types.ObjectId, ref: 'User', required: true },
     published : Boolean,
-    picture : String,
+    picPath : String,
+    picName: String,
     comment : String,
     location : String,
     achieved : Boolean

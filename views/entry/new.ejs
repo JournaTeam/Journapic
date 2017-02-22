@@ -1,14 +1,17 @@
 <div class="landing-background">
 </div>
 
-<form class="form-horizontal" action="/entry" method="POST">
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="picture">Foto</label>
-    <div class="col-md-4">
-      <input id="picture" name="picture" type="text" placeholder="Sube una foto" class="form-control input-md" required="">
+  <form class="form-horizontal" action="/entry" method="POST" enctype="multipart/form-data">
+
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+        <!-- <label class="col-md-4 control-label" for="picture">Foto</label> -->
+        <!-- <input id="picture" name="picture" type="text" placeholder="Sube una foto" class="form-control input-md" required=""> -->
+        <input type="text" name="name">
+        <input type="file" name="file">
+      </div>
     </div>
-  </div>
+
   <!-- Textarea -->
   <div class="form-group">
     <label class="col-md-4 control-label" for="textarea">Mensajito</label>
@@ -27,8 +30,8 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="button1id">Resultado del dia</label>
     <div class="col-md-8">
-      <button id="button1id" name="submit" class="btn btn-success">He cumplido</button>
-      <button id="button2id" name="notAchieved" class="btn btn-danger">No he cumplido</button>
+      <button id="button1id" name="submit" type="submit" class="btn btn-success">He cumplido</button>
+      <button id="button2id" name="notAchieved" type="submit" class="btn btn-danger">No he cumplido</button>
     </div>
   </div>
 </form>
