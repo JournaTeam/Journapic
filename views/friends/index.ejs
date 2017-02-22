@@ -1,0 +1,27 @@
+<div class="container col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+  <%if(typeof(friendRequests)!=='undefined'){%>
+    <table class="table table-hover">
+      <tr>
+        <th>Received friendship requests</th>
+        <th></th>
+      </tr>
+      <% if(typeof(message)!=='undefined'){%>
+        <tr>
+          <%=message%>
+        </tr>
+      <%}%>
+      <%friendRequests.forEach(function(elem){%>
+        <tr>
+            <td><%=elem.receiver.username%></td>
+            <td><%=elem.receiver.email%></td>
+            <form action="/friends/decision" method="post">
+              <td><button name="decision" class="btn btn-success" value="accepted">Accept</button></td>
+              <td><button name="decision" class="btn btn-danger" type="submit" value="denied">Reject</button></td>
+              <input type="text" name="friendshipID" value="<%=elem._id%>" hidden>
+            </form>
+        </tr>
+      <%});%>
+    </table>
+  <%};%>
+
+</div>
