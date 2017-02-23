@@ -4,6 +4,11 @@ $color-white: #FFFFFF;
 $green-notification: #dff0d8;
 $dark-green: #468847;
 
+@font-face {
+    font-family: SignPainter-HouseScriptSemibold-2;
+    src: url(ufonts.com_signpainter-housescript.ttf);
+}
+
 table{
   background-color: rgba(255, 255, 255, 0.8x);
 }
@@ -55,14 +60,14 @@ body{
 }
 
 .logo-font-small{
-  font-family: SignPainter-HouseScriptSemibold, sans-serif;
+  font-family: SignPainter-HouseScriptSemibold, SignPainter-HouseScriptSemibold-2, sans-serif;
   font-size: 30px;
   background-color: white;
   text-align: center;
 }
 
 h1.logo-font {
-  font-family: SignPainter-HouseScriptSemibold, sans-serif;
+  font-family: SignPainter-HouseScriptSemibold, SignPainter-HouseScriptSemibold-2, sans-serif;
   font-size: 48px;
   color: $color-white;
   display: inline;
