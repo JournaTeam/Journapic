@@ -19,7 +19,7 @@ const entryRoutes      = require('./routes/entry.js');
 const friendsRoutes      = require('./routes/friends.js');
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 //Connect to db
-mongoose.connect('mongodb://localhost:27017/journapic');
+mongoose.connect('mongodb://heroku_cj7bmqlb:rr1mdhedoafvpp7hosd8ae10j3@ds157819.mlab.com:57819/heroku_cj7bmqlb');
 const app = express();
 
 // view engine setup
