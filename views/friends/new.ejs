@@ -2,7 +2,27 @@
 </div>
 <div class="row">
   <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 signup">
-    <form id="form" action="/" method="POST">
+    <h1 class="intro-message">Add friend:</h1>
+    <%if(awaitingRequests.length > 0){%>
+      <table class="table table-hover">
+        <tr>
+          <th colspan="3">Friendship requests awaiting response: </th>
+        </tr>
+        <%awaitingRequests.forEach(function(elem){%>
+          <tr>
+              <td><%=elem.receiver.username%></td>
+              <td><%=elem.receiver.email%></td>
+              <td>
+                <form action="/friends/delete" method="post">
+                  <button name="decision" class="btn btn-danger" type="submit" value="denied">Cancel request</button>
+                  <input type="text" name="friendshipID" value="<%=elem._id%>" hidden>
+                </form>
+              </td>
+          </tr>
+        <%});%>
+      </table>
+    <%};%>
+    <form id="form" action="/friends/" method="POST">
       <div class="form-group">
       	<label for="username" class="cols-sm-2 control-label">Username</label>
       		<div class="cols-sm-10">

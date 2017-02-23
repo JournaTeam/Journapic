@@ -15,7 +15,19 @@ function ensureAuthenticator(req, res, next){
 }
 
 router.get('/', ensureAuthenticator, function(req, res, next) {
-    res.render('index', {req, notifications: res.locals.notifics});
+    Friends.find({ $and: [ { $or: [{ requester : req.user._id },{ receiver : req.user._id }] }, { status : 'accepted' } ] })
+    .populate('requester')
+    .populate('receiver')
+    .exec(function (err, friends){
+      friends = friends.map(function(elem){if(elem.requester._id===req.user._id){return elem.receiver;}else{return elem.requester;}});
+      const friendIDs = friends.map(function(elem){return elem._id;});
+      Entry.find( { _creator : { $in : friends } })
+      .populate('_creator')
+      .exec(function(err, entries){
+        if(err){return next(err);}
+        res.render('index', {req, notifications: res.locals.notifics, entries});
+      });
+    });
 });
 
 router.get('/signup', ensureLoggedOut(), (req, res) => {
@@ -42,19 +54,42 @@ router.post('/logout', ensureLoggedIn('/login'), (req, res) => {
 });
 
 router.get('/:username', ensureLoggedIn(), (req, res) => {
-    const usernameParam = req.params.username;
-    if (usernameParam === req.user.username) {
-      User.findOne({ username : usernameParam }, function (err, result){
+    function renderBio(username){
+      User.findOne({ username }, function (err, result){
         if (err) { return next(err); }
         const id = result._id;
-        Entry.find({ _creator : id }, function(err, arrayOfEntries){
+        Entry.find({ _creator : id })
+        .sort([['updated_at', -1]])
+        .exec( function(err, arrayOfEntries){
           if (err) { return next(err); }
-          res.render('bio', {req, arrayOfEntries, usernameParam, notifications: res.locals.notifics});
+          res.render('bio', {req, arrayOfEntries, usernameParam : username, notifications: res.locals.notifics});
         });
       });
-    }else{
-      res.redirect('/');
     }
+
+    const friend = req.params.username;
+
+    if (friend === req.user.username) {
+      return renderBio(friend);
+    }else{
+      User.findOne({username : friend}, function(err, result){
+        if (err) { res.redirect('/friends'); }
+        const friendID = result._id;
+        const cond1 = {$and:[{ requester : req.user._id }, { receiver : result._id }]};
+        const cond2 = {$and:[{ receiver : req.user._id }, { requester : result._id }]};
+        Friends.findOne({ $and: [ { $or: [ cond1, cond2] }, { status : 'accepted' } ] })
+        .populate('requester')
+        .populate('receiver')
+        .exec(function (err, friendshipObj){
+          if (err) { res.redirect('/new'); }
+          if (friendshipObj) {
+            return renderBio(friend);
+          }else{
+            res.redirect('/friends');
+          }
+        });
+      });
+  }
 });
 
 

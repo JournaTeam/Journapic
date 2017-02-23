@@ -1,14 +1,28 @@
-<!-- <div class="landing-background">
-</div> -->
-Hola <%=req.user.username%>, aqui tienes la bio de <%=usernameParam%>:
-<br>
-<ul>
-  <%arrayOfEntries.forEach(function(elem){%>
-    <br><br>
-    <li>Picture:  <br>
-      <img src="<%= elem.picPath %>" alt="<%= elem.picName %>" /></li>
-    <li>Comment:   <%=elem.comment%> </li>
-    <li>Location:   <%=elem.location%> </li>
-    <li>Achieved?   <%=elem.achieved%> </li>
-  <%});%>
-</ul>
+<div class="landing-background">
+</div>
+<div class="container">
+  <h1 class="intro-message"><%=usernameParam%>'s bio:</h1>
+  <div class="row">
+    <%arrayOfEntries.forEach(function(elem){%>
+      <div class="col-xs-18 col-sm-6 col-md-3">
+            <div class="thumbnail">
+              <img src="<%= elem.picPath %>" alt="">
+                <div class="caption">
+                  <%var daysAgo = (new Date()).getDate() - elem.created_at.getDate();%>
+                  <%if(daysAgo===0){%><h4>Today</h4><%}else{%>
+                    <h4><%=daysAgo%> day<%if(daysAgo>1){%>s<%}%> ago</h4>
+                  <%}%>
+                  <p class="text-muted"><%=elem.created_at.getDate()%>/<%=elem.created_at.getMonth()%>/<%=elem.created_at.getFullYear()%></p>
+                  <p class="text-muted">Location : <%=elem.location%><p>
+                  <%if(elem.achieved){%>
+                    <button class="btn btn-success btn-xs">Delivered</button>
+                  <%}else{%>
+                    <button class="btn-info btn-danger btn  btn-xs">Failed</button>
+                  <%}%>
+                  <p><%=elem.comment%></p>
+              </div>
+            </div>
+          </div>
+    <%});%>
+  </div>
+</div>

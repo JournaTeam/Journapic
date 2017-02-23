@@ -1,27 +1,68 @@
+<div class="landing-background">
+</div>
 <div class="container col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
-  <%if(typeof(friendRequests)!=='undefined'){%>
+
+  <h1 class="intro-message">Your friends:</h1>
+
+  <% if(typeof(message)!=='undefined'){%>
+      <%=message%>
+  <%}%>
+
+
+  <%if(friendRequests.length > 0){%>
     <table class="table table-hover">
       <tr>
         <th>Received friendship requests</th>
-        <th></th>
+        <th> </th>
+        <th> </th>
       </tr>
-      <% if(typeof(message)!=='undefined'){%>
-        <tr>
-          <%=message%>
-        </tr>
-      <%}%>
       <%friendRequests.forEach(function(elem){%>
         <tr>
-            <td><%=elem.receiver.username%></td>
-            <td><%=elem.receiver.email%></td>
-            <form action="/friends/decision" method="post">
-              <td><button name="decision" class="btn btn-success" value="accepted">Accept</button></td>
-              <td><button name="decision" class="btn btn-danger" type="submit" value="denied">Reject</button></td>
-              <input type="text" name="friendshipID" value="<%=elem._id%>" hidden>
-            </form>
+            <td><%=elem.requester.username%></td>
+            <td><%=elem.requester.email%></td>
+            <td>
+              <form action="/friends/decision" method="post">
+                <button name="decision" class="btn btn-success" value="accepted">Accept</button>
+                <button name="decision" class="btn btn-danger" type="submit" value="denied">Reject</button>
+                <input type="text" name="friendshipID" value="<%=elem._id%>" hidden>
+              </form>
+            </td>
         </tr>
       <%});%>
     </table>
   <%};%>
+
+  <table class="table table-hover">
+  <%if( typeof(friends) !== 'undefined' && friends.length > 0){%>
+      <tr>
+        <th>Current friends</th>
+        <th> </th>
+        <th> </th>
+      </tr>
+      <%friends.forEach(function(elem){ %>
+        <tr>
+            <%  if(elem.receiver._id+"" === req.user._id+""){%>
+              <td><%=elem.requester.username%></td>
+              <td><%=elem.requester.email%></td>
+              <td><a href="/<%=elem.requester.username%>"><button class="btn btn-info">View bio</button></a></td>
+            <%}else{%>
+              <td><%=elem.receiver.username%></td>
+              <td><%=elem.receiver.email%></td>
+              <td><a href="/<%=elem.receiver.username%>"><button class="btn btn-info">View bio</button></a></td>
+              <%}%>
+            <td>
+              <form action="/friends/delete" method="post">
+                <button name="decision" class="btn btn-danger" type="submit" value="denied">Unfriend</button>
+                <input type="text" name="friendshipID" value="<%=elem._id%>" hidden>
+              </form>
+            </td>
+        </tr>
+      <%});%>
+  <%};%>
+  <tr>
+    <th colspan="4"> <a href="/friends/new"><button class="btn btn-success col-sm-4 col-sm-offset-4">Add new friend</button></a></th>
+  </tr>
+</table>
+
 
 </div>

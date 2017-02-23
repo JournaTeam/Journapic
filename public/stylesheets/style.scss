@@ -4,13 +4,44 @@ $color-white: #FFFFFF;
 $green-notification: #dff0d8;
 $dark-green: #468847;
 
+table{
+  background-color: white;
+}
+
+.welcome-message{
+  text-shadow : 2px 2px 3px rgba(0,0,0,0.6);
+  font-size: 30px;
+  color: white;
+  max-width: 550px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
+.right{
+  position: absolute;
+  right: 10px
+}
+.intro-message{
+  margin-top: 30px;
+  text-shadow : 2px 2px 3px rgba(0,0,0,0.6);
+  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+  font-size: 60px;
+  color: white;
+  text-align: center;
+  }
+
+.blue-letters {
   color: #00B7FF;
+  :hover, :focus{
+    text-decoration: none;
+  }
 }
 
 body{
@@ -42,7 +73,7 @@ h1.logo-font {
 }
 
 .landing-background{
-  background-image: url('../images/landing1.png');
+  background-image: url('../images/landing1.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -56,8 +87,8 @@ h1.logo-font {
 
 .signup{
   position: absolute;
-  top: 40%;
   transform: translateY(-50%);
+  top: 270px;
 }
 
 .nav > li > a {
@@ -83,7 +114,11 @@ h1.logo-font {
   border: 1px solid $dark-green;
   border-radius: 5px;
   padding: 7px;
-  text-align: center;
+}
+
+.friend-request-text{
+  margin: 7px;
+  float: left;
 }
 
 .hueco{

@@ -3,8 +3,33 @@
 </div>
 <div class="home-heading text-center row">
   <div class="home-heading-wrapper col-md-12">
-    <h1>PAGINA DE BIENVENIDA DE USUARIO</h1>
-    <p> Mensaje</p>
+    <h1 class="intro-message">Welcome, <%=req.user.username%></h1>
     <a class="btn btn-default" href="/entry/new">Create new entry</a>
+    <a class="btn btn-default" href="/<%=req.user.username%>">View your bio</a>
+    <a class="btn btn-default" href="/friends">View your friends</a>
+
+    <table class="table table-hover">
+    <%if( typeof(entries) !== 'undefined' && entries.length > 0){%>
+        <tr>
+          <th>Friend entries feed:</th>
+          <th> </th>
+          <th> </th>
+        </tr>
+        <%entries.forEach(function(elem){ %>
+          <tr>
+                <td><%=elem%></td>
+                <td></td>
+                <td><a href="/<%=elem%>"><button class="btn btn-info">View bio</button></a></td>
+              <td>
+                <form action="/friends/delete" method="post">
+                  <button name="decision" class="btn btn-danger" type="submit" value="denied">Unfriend</button>
+                  <input type="text" name="friendshipID" value="<%=elem%>" hidden>
+                </form>
+              </td>
+          </tr>
+        <%});%>
+    <%};%>
+  </table>
+
   </div>
 </div>
