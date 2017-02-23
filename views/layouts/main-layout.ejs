@@ -15,12 +15,13 @@
           <h1 class="logo-font"><a href="/" class="blue-letters">Deliver</a></h1>
           <ul class="navbar-nav navbar-right nav">
             <%if (typeof(req.user) === "undefined") {%>
-            <li><a href="/login" class="blue-letters">Login</a></li>
+            <li><a href="/login">Login</a></li>
             <%}%>
             <%if (typeof(req.user) === "undefined") {%>
-            <li><a href="/signup" class="blue-letters">Signup</a></li>
+            <li><a href="/signup">Signup</a></li>
             <%}%>
             <%if (typeof(req.user) !== "undefined") {%>
+            <li class="blue-letters">Logged in as <%=req.user.username%></li>
             <li>
               <form action="/logout" method="POST">
                 <button class="btn btn-danger logout " type="submit">Logout</button>
@@ -31,15 +32,19 @@
         </div>
       </div>
     </nav>
+    <div class="fixed">
+      <div class="hueco"></div>
+      <% if (typeof(notifications)!=='undefined'){  %>
+        <% notifications.forEach(function(elem){%>
+          <div class="friend-request">
+            <div class="friend-request-text">You have a new friendship request from <%=elem.requester.username%></div>
+            <a href="/friends"><button name="review" class="btn btn-success right">Review</button></a>
+          </div>
+        <%})%>
+      <%}%>
+    </div>
     <div class="hueco"></div>
-    <% if (typeof(notifications)!=='undefined'){  %>
-      <% notifications.forEach(function(elem){%>
-        <div class="friend-request">
-          <div class="friend-request-text">You have a new friendship request from <%=elem.requester.username%></div>
-          <a href="/friends"><button name="review" class="btn btn-success right">Review</button></a>
-        </div>
-      <%})%>
-    <%}%>
+
     <div class="main-container container-fluid">
       <%- body -%>
     </div>

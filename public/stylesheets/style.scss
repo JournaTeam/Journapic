@@ -5,7 +5,13 @@ $green-notification: #dff0d8;
 $dark-green: #468847;
 
 table{
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8x);
+}
+
+.fondo{
+  background-color: rgba(255, 255, 255, 0.8x);
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .welcome-message{
@@ -39,14 +45,20 @@ body {
 
 .blue-letters {
   color: #00B7FF;
-  :hover, :focus{
-    text-decoration: none;
-  }
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
 body{
   margin: 0;
   padding: 0;
+}
+
+.logo-font-small{
+  font-family: SignPainter-HouseScriptSemibold, sans-serif;
+  font-size: 30px;
+  background-color: white;
+  text-align: center;
 }
 
 h1.logo-font {
@@ -72,6 +84,13 @@ h1.logo-font {
   height: 80px
 }
 
+.fixed{
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1
+}
+
 .landing-background{
   background-image: url('../images/landing1.jpg');
   background-position: center;
@@ -81,7 +100,7 @@ h1.logo-font {
   right: 0;
   bottom: 0;
   top: 0;
-  position: absolute;
+  position: fixed;
   z-index: -1;
 }
 
@@ -92,7 +111,7 @@ h1.logo-font {
 }
 
 .nav > li > a {
-  color: $color-white;
+  color: #00B7FF;
 }
 
 .rmv-white-hvr:hover{
@@ -103,6 +122,15 @@ h1.logo-font {
   position: absolute;
   margin: 50px;
   margin-top: 0px;
+}
+
+.delivered{
+  color: green;
+  font-weight: bold;
+}
+.failed{
+  color: red;
+  font-weight: bold;
 }
 
 .friend-request{

@@ -1,11 +1,11 @@
 <div class="landing-background">
 </div>
-<h1 class="new-entry-title">New entry:</h1>
-
+<h1 class="intro-message">New entry</h1>
+  <div class="fondo col-sm-4 col-sm-offset-4">
   <form class="form-horizontal" action="/entry" method="POST" enctype="multipart/form-data">
     <div class="form-group">
-      <label class="col-md-4 control-label" for="file">Picture</label>
-      <div class="col-md-4 col-sm-offset-4">
+      <label class=" control-label" for="file">Picture</label>
+      <div class="">
         <input type="text" class="form-control input-md name="name" placeholder="Click 'choose file' to upload an image">
         <input type="file" class="btn" name="file" id="file">
       </div>
@@ -13,24 +13,23 @@
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="textarea" >Comment</label>
-    <div class="col-md-4">
+    <label class=" control-label" for="textarea" >Comment</label>
+    <div class="">
       <textarea class="form-control" id="textarea" name="comment" placeholder="How was your day?"></textarea>
     </div>
   </div>
   <!-- Text input-->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Location</label>
-    <div class="col-md-4">
+    <label class=" control-label" for="textinput">Location</label>
+    <div class="">
       <input id="textinput" name="location" type="text" placeholder="location" class="form-control input-md" required="">
     </div>
   </div>
   <!-- Button (Double) -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="button1id"></label>
-    <div class="col-md-8">
-      <button id="button1id" name="submit" type="submit" class="btn btn-success">Today I delivered</button>
-      <button id="button2id" name="notAchieved" type="submit" class="btn btn-danger">Today I failed</button>
-    </div>
+    <label class=" control-label" for="button1id"></label>
+      <button id="button1id" name="submit" type="submit" class="btn btn-success col-xs-6">Today I delivered</button>
+      <button id="button2id" name="notAchieved" type="submit" class="btn btn-danger col-xs-6">Today I failed</button>
   </div>
 </form>
+</div>

@@ -23,6 +23,7 @@ router.get('/', ensureAuthenticator, function(req, res, next) {
       const friendIDs = friends.map(function(elem){return elem._id;});
       Entry.find( { _creator : { $in : friends } })
       .populate('_creator')
+      .sort([['updated_at', -1]])
       .exec(function(err, entries){
         if(err){return next(err);}
         res.render('index', {req, notifications: res.locals.notifics, entries});
