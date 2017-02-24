@@ -39,7 +39,7 @@ app.use(session({
   secret: 'journapicdev',
   resave: false,
   saveUninitialized: true,
-  store: new MongoStore( { mongooseConnection: mongoose.connection })
+  store: new MongoStore( { mongooseConnection: mongoose.connection, ttl: 24 * 60 * 60 * 10 })
 }));
 
 passport.serializeUser((user, cb) => {
