@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 const express             = require('express');
 const path                = require('path');
 const favicon             = require('serve-favicon');
@@ -19,7 +19,7 @@ const authRoutes      = require('./routes/authentication.js');
 const entryRoutes      = require('./routes/entry.js');
 const friendsRoutes      = require('./routes/friends.js');
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
-
+require('dotenv').config();
 //Connect to db
 mongoose.connect(process.env.MONGODB_URI);
 //mongoose.connect('mongodb://localhost:27017/journapic');
