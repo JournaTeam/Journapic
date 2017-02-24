@@ -74,8 +74,13 @@ router.get('/:username', ensureLoggedIn(), (req, res) => {
     if (friend === req.user.username) {
       return renderBio(friend);
     }else{
-      User.findOne({"username": friend}, function(err, result){
+      User.findOne({username: friend}, function(err, result){
         if (err) { res.redirect('/friends'); }
+        if(!result){
+          console.log("USername not found");
+          res.redirect('/login');
+          return;
+        }
         const friendID = result._id;
         const cond1 = {$and:[{ requester : req.user._id }, { receiver : result._id }]};
         const cond2 = {$and:[{ receiver : req.user._id }, { requester : result._id }]};
