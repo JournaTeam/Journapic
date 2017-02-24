@@ -70,7 +70,7 @@ router.get('/:username', ensureLoggedIn(), (req, res) => {
 
     const friend = req.params.username;
     console.log("asjjsdadjfdjf");
-    console.log(req.params.username);
+    console.log("esto es req.params.username", req.params.username);
     if (friend === req.user.username) {
       return renderBio(friend);
     }else{
